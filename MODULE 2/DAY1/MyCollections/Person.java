@@ -38,4 +38,21 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+    @Override
+    public int hashCode(){
+        return this.fname.hashCode()+this.lname.hashCode();
+    }
+    @Override
+    public boolean equals(Object o){
+        if(this==o){
+            return true;
+        }
+        if(!(o instanceof Person)){
+            return false;
+        }
+        Person p=(Person)o;
+
+        return this.age==p.age && this.fname.equalsIgnoreCase(p.fname) && this.lname.equalsIgnoreCase(p.lname);
+
+    }
 }
