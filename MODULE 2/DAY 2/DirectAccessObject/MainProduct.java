@@ -3,6 +3,7 @@ package DirectAccessObject;
 import DirectAccessObject.entity.Product;
 import DirectAccessObject.ui.Productimpl;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MainProduct {
@@ -12,6 +13,17 @@ public class MainProduct {
         Scanner sc = new Scanner(System.in);
 
         Productimpl productdao = new Productimpl();
+
+        productdao.save(new Product(1, "iPhone", "Mobile", "Apple", 80000, 10, 4.8));
+        productdao.save(new Product(2, "Galaxy S24", "Mobile", "Samsung", 70000, 12, 4.6));
+        productdao.save(new Product(3, "Laptop", "Electronics", "Dell", 65000, 15, 4.5));
+        productdao.save(new Product(4, "Smart Watch", "Accessories", "Noise", 3000, 20, 4.2));
+        productdao.save(new Product(5, "Headphones", "Audio", "Sony", 5000, 18, 4.7));
+
+        productdao.save(new Product(6, "iPhone", "Mobile", "Apple", 70000, 10, 4.8));
+
+
+
 
         System.out.println("========== PRODUCT MENU ==========");
         System.out.println("1 -> Save Product");
@@ -24,6 +36,7 @@ public class MainProduct {
         System.out.println("8 -> Find Products By Brand");
         System.out.println("9 -> Sort Products By Price Asc");
         System.out.println("10 -> Sort Products By Rating Desc");
+        System.out.println("11 -> Find by Product name");
         System.out.println("11 -> Exit");
 
         do {
@@ -218,8 +231,17 @@ public class MainProduct {
                     }
 
                     break;
-
                 case 11:
+                    System.out.println("Enter product name:");
+                    String str=sc.nextLine();
+                    Iterable<Product> productbyname=productdao.findByName(str);
+
+                    for(Product p2:productbyname){
+                        System.out.println(p2+" \n");
+                    }
+                    break;
+
+                case 12:
 
                     System.out.println("Exiting...");
                     System.exit(0);
